@@ -1,0 +1,40 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body>
+    <%-include("partials/header")%>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="loginPage">
+            <h1>CHARGE IT</h1>
+            <img
+              src="/images/user-avatar.png"
+              alt="user-avatar"
+              width="100px"
+              height="100px"
+            />
+            <h3>LOGIN HERE</h3>
+            <div class="form">
+              <form action="/login" method="post">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Username"
+                  name="username"
+                />
+                <input
+                  class="form-control"
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                />
+                <button class="form-control">LOGIN</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+  </body>
+</html>

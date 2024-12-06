@@ -1,0 +1,76 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body>
+    <%-include("partials/header")%>
+    <main>
+      <div class="container">
+        <h3 class="text">TRANSACTION LOG</h3>
+        <p>Total transactions made today so far.</p>
+        <hr />
+        <div class="row">
+          <div
+            class="col-lg-4 mb-4"
+            style="background-color: rgb(49, 136, 236)"
+          >
+            <div class="unit">
+              <img
+                src="/images/phone-icon.png"
+                alt="phone-icon"
+                width="70px"
+                height="70px"
+              />
+              <h2>TOTAL PHONES</h2>
+              <h3><%=tph.qty%></h3>
+              <h2>UNIT PRICE</h2>
+              <h6><%=curF.format(tph.unit_price)%></h6>
+              <h2>TOTAL</h2>
+              <h5><%=curF.format(tph.totalAmount)%></h5>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="unit">
+              <img
+                src="/images/powerbank-icon.png"
+                alt="powerbank-icon"
+                width="70px"
+                height="70px"
+              />
+              <h2>TOTAL POWER BANK</h2>
+              <h3><%=tpb.qty%></h3>
+              <h2>UNIT PRICE</h2>
+              <h6><%=curF.format(tpb.unit_price)%></h6>
+              <h2>TOTAL</h2>
+              <h5><%=curF.format(tpb.totalAmount)%></h5>
+            </div>
+          </div>
+          <div
+            class="col-lg-4 mb-4"
+            style="background-color: rgb(62, 232, 232)"
+          >
+            <div class="unit">
+              <img
+                src="/images/laptop-icon.png"
+                alt="laptop-icon"
+                width="70px"
+                height="70px"
+              />
+              <h2>TOTAL LAPTOPS</h2>
+              <h3><%=tlp.qty%></h3>
+              <h2>UNIT PRICE</h2>
+              <h6><%=curF.format(tlp.unit_price)%></h6>
+              <h2>TOTAL</h2>
+              <h5><%=curF.format(tlp.totalAmount)%></h5>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h3 class="text">TOTAL AMOUNT MADE</h3>
+        <h3 class="text">
+          <%= curF.format(tph.totalAmount + tpb.totalAmount + tlp.totalAmount)
+          %>
+        </h3>
+      </div>
+    </main>
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+  </body>
+</html>

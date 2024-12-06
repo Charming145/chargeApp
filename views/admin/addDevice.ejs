@@ -1,0 +1,136 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body>
+    <%-include("partials/header")%>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="registerDevice">
+              <h1>CHARGE IT</h1>
+
+              <img
+                src="/images/devices.png"
+                alt="user-avatar"
+                width="100px"
+                height="100px"
+              />
+              <h3>REGISTER DEVICE</h3>
+              <div class="form">
+                <form
+                  action="/admin/add-device"
+                  method="post"
+                  id="form-add-device"
+                >
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Username"
+                    name="name"
+                  />
+
+                  <input
+                    class="form-control"
+                    type="number"
+                    placeholder="Number of Phone"
+                    name="phone_qty"
+                  />
+
+                  <input
+                    class="form-control"
+                    type="number"
+                    placeholder="Number of Powerbank"
+                    name="pb_qty"
+                  />
+                  <input
+                    class="form-control"
+                    type="number"
+                    placeholder="Number of Laptop"
+                    name="laptop_qty"
+                  />
+                  <button
+                    class="form-control"
+                    data-bs-target="#idModal"
+                    data-bs-toggle="modal"
+                  >
+                    🔌REGISTER
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- modal  -->
+    <!-- confirmation Modal -->
+    <div
+      class="modal fade"
+      id="idModal"
+      aria-hidden="true"
+      aria-labelledby="toggleLabel2"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="toggleLabel2">Confirm Data</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="confirmModal"></div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary"
+              data-bs-target="#ModalToggle"
+              data-bs-toggle="modal"
+              id="confirmBtn"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Generated ID modal -->
+    <div
+      class="modal fade"
+      id="ModalToggle"
+      aria-hidden="true"
+      aria-labelledby="toggleLabel"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="toggleLabel">Customer ID</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="displayToken"></div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+    <script src="/js/script.js"></script>
+  </body>
+</html>

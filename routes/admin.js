@@ -1,0 +1,12 @@
+const express = require("express");
+const router = express.Router();
+const adminController = require("../controller/admin");
+router.get("/dashboard", adminController.adminHome);
+router.get("/add-device", adminController.getAddDevice);
+router.get("/device/:id", adminController.getDevice);
+router.get("/charge-record", adminController.getChargeRecord);
+router.get("/charge-record-api", adminController.getChargeRecordApi);
+router.post("/add-device", adminController.postAddDevice);
+router.post("/update-record", adminController.updateRecord);
+router.get("/log", adminController.getLog);
+module.exports = router;

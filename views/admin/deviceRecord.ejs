@@ -1,0 +1,302 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body>
+    <%-include("partials/header")%>
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1>🔌DEVICE RECORD</h1>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search by Code/Username"
+                id="searchInput"
+              />
+              <button
+                class="btn btn-outline-primary"
+                id="searchBtn"
+                style="height: 38px"
+              >
+                🔎
+              </button>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">CODE</th>
+                    <th scope="col">USERNAME</th>
+                    <th scope="col">PHONE</th>
+                    <th scope="col">POWER BANK</th>
+                    <th scope="col">LAPTOP</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">ACTION</th>
+                  </tr>
+                </thead>
+                <tbody id="tableContent">
+                  <%data.forEach((d,i)=>{%>
+                  <tr>
+                    <th scope="row"><%=i+1%></th>
+                    <td><%=d.code%></td>
+                    <td><%=d.name%></td>
+                    <td><%=d.phone_qty%></td>
+                    <td><%=d.pb_qty%></td>
+                    <td><%=d.laptop_qty%></td>
+                    <td><%=d.retrived ? '🔴' : '🟢'%></td>
+                    <td>
+                      <input type="hidden" name="id" value="<%=d.code%>" />
+                      <button
+                        class="btn editModalBtn"
+                        data-bs-target="#editModal"
+                        data-bs-toggle="modal"
+                      >
+                        📝
+                      </button>
+                    </td>
+                  </tr>
+                  <%})%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="editModal"
+      aria-hidden="true"
+      aria-labelledby="toggleLabel2"
+      tabindex="-1"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="updateTextLabel">
+              Update Details
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="editBody"></div>
+        </div>
+      </div>
+    </div>
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+    <script>
+      // Device Record Variables
+      const editBtnEl = document.querySelectorAll(".editModalBtn");
+      const searchInputEl = document.getElementById("searchInput");
+      const searchBtnEl = document.getElementById("searchBtn");
+      const tableBodyEl = document.getElementById("tableContent");
+      const editBodyEl = document.getElementById("editBody");
+      const updateLabel = document.getElementById("updateTextLabel");
+      const updateData = {};
+      //Device Record setup
+      //Editing a Record
+      editBtnAction();
+      function editBtnAction() {
+        editBtnEl.forEach((b) => {
+          b.addEventListener("click", (e) => {
+            const param = e.target.previousElementSibling.value;
+            let url = `/admin/device/${param}`;
+            fetchData(url).then((result) => {
+              RenderEditModal(result[0]);
+            });
+          });
+        });
+      }
+      //Working on the search Input
+      searchInputEl.addEventListener("input", (e) => {
+        let url = `/admin/device/${searchInputEl.value}`;
+        if (!searchInputEl.value.includes("/")) {
+          if (searchInputEl.value) {
+            fetchData(url).then((result) => {
+              renderSearchHTML(result);
+            });
+          } else {
+            fetchAllRecord();
+          }
+        }
+      });
+      //Fetching and rendering all the records from our DB, when the search field is empty.
+      let fetchAllRecord = () => {
+        let url = `/admin/charge-record-api`;
+        fetchData(url).then((result) => {
+          renderSearchHTML(result);
+        });
+      };
+      //Fetching Data from DB using a search parameter.
+      let fetchData = async (url) => {
+        try {
+          const res = await fetch(url);
+          const d = await res.json();
+          return d;
+        } catch (err) {
+          console.log(err);
+          return err;
+        }
+      };
+
+      //Rending DB contents on the table
+      let renderSearchHTML = (data) => {
+        tableBodyEl.innerHTML = "";
+        data.forEach((d, i) => {
+          tableBodyEl.insertAdjacentHTML(
+            "beforeend",
+            `<tr>
+                          <th scope="row">${i + 1}</th>
+                          <td>${d.code}</td>
+                          <td>${d.name}</td>
+                          <td>${d.phone_qty}</td>
+                          <td>${d.pb_qty}</td>
+                          <td>${d.laptop_qty}</td>
+                          <td>${d.retrived ? "🔴" : "🟢"}</td>
+                          <td>
+                            <input type="hidden" name="id" value="${d.code}" />
+                            <button
+                              class="btn editModalBtn"
+                              data-bs-target="#editModal"
+                              data-bs-toggle="modal"
+                              onclick = "editBtnAction()"
+                            >
+                              📝
+                            </button>
+                          </td>
+                        </tr>`
+          );
+
+          document.querySelectorAll(".editModalBtn").forEach((e) => {
+            e.addEventListener("click", (e) => {
+              const param = e.target.previousElementSibling.value;
+              let url = `/admin/device/${param}`;
+              fetchData(url).then((result) => {
+                RenderEditModal(result[0]);
+              });
+            });
+          });
+        });
+      };
+      let RenderEditModal = (data) => {
+        editBodyEl.innerHTML = "";
+        updateLabel.innerHTML = "Update Details";
+        updateLabel.classList.remove("successLabel");
+        editBodyEl.insertAdjacentHTML(
+          "afterbegin",
+          `
+            <div class="form">
+                  <form
+
+
+                    id="update-record"
+                  >
+                  <input type="hidden" name="id" value="${data._id}" />
+                  <label> Code </label>
+                  <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Code"
+                      name="code"
+                      readonly
+                      value="${data.code}"
+                    />
+                    <label> Username </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      placeholder="Username"
+                      name="name"
+                      value="${data.name}"
+                    />
+                    <label> Number of Phone </label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      placeholder="Number of Phones"
+                      name="phone_qty"
+                      value="${data.phone_qty}"
+                    />
+                    <label> Number of Power bank </label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      placeholder="Number of Powerbanks"
+                      name="pb_qty"
+                      value="${data.pb_qty}"
+                    />
+                    <label> Number of Laptops </label>
+                    <input
+                      class="form-control"
+                      type="number"
+                      placeholder="Number of Laptop"
+                      name="laptop_qty"
+                      value="${data.laptop_qty}"
+                    />
+                    <hr>
+                    <h6>More Settings</h6>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" ${
+                          data.retrived ? "checked" : ""
+                        } value="false" role="switch" id="checkMe" name="retrived">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Retrived</label>
+                    </div>
+                    <button
+                      class="form-control btn btn-outline-primary"
+                      data-bs-target="#idModal"
+                    >
+                      📝Update
+                    </button>
+                  </form>
+                </div>
+            `
+        );
+        const updateFormEl = document.getElementById("update-record");
+        const checkBtn = document.getElementById("checkMe");
+        checkBtn.addEventListener("change", (e) => {
+          if (e.target.checked == true) {
+            e.target.value = true;
+          } else {
+            e.target.value = false;
+          }
+        });
+        updateFormEl.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          console.log(e.target);
+          const formData = e.target;
+          for ([k, v] of Object.entries(formData)) {
+            if (v.type !== "submit") updateData[v.name] = v.value;
+          }
+          try {
+            let res = await fetch("/admin/update-record", {
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              method: "POST",
+              body: JSON.stringify(updateData),
+            });
+            const d = await res.json();
+
+            if (d) {
+              fetchAllRecord();
+              updateLabel.innerHTML = "✅ Update Successful";
+              updateLabel.classList.add("successLabel");
+            } else {
+              updateLabel.innerHTML = "❌ Update Failed";
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        });
+      };
+    </script>
+  </body>
+</html>

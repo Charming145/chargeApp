@@ -1,0 +1,68 @@
+body {
+  /* height: 100%; */
+  font-family: "montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+.container {
+  text-align: center;
+  padding: 0 30px;
+  margin: 70px auto;
+}
+.row > * {
+  /* border: 1px solid gray; */
+  margin: auto;
+  /* box-shadow: 0 1px 15px gray; */
+}
+.col-lg-4 {
+  padding: 10px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(27, 27, 27);
+  color: white;
+}
+/* Styling the Device Registration Page */
+/* Styling the Confirmation Modal */
+.confirm {
+  display: flex;
+  justify-content: space-evenly;
+}
+.unit {
+  text-align: center;
+}
+.unit h2 {
+  font-size: 0.6rem;
+  margin-top: 5px;
+}
+.unit h3 {
+  text-align: center;
+}
+/* Styling the Token Modal */
+.tokenArea {
+  text-align: center;
+  font-size: 2rem;
+}
+.successLabel {
+  color: green;
+  transition: 0.5s all linear 0s;
+  transform: translateX(50px) scale(1.2);
+}
+/* Styling the form switches */
+.form-switch {
+  display: flex;
+}

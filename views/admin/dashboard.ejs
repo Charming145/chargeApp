@@ -1,0 +1,39 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body>
+    <%-include("partials/header")%>
+    <main>
+      <div class="container">
+        <h3 class="text">WELCOME BACK SIRMARIO</h3>
+        <hr />
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <div class="unit">
+              <img src="/images/register-icon.png" alt="phone-icon" />
+              <div class="div">
+                <a class="link" href="/admin/add-device">ADD DEVICE</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="unit">
+              <img src="/images/database-icon.png" alt="powerbank-icon" />
+              <div class="div">
+                <a class="link" href="/admin/charge-record">RECORD</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="unit">
+              <img src="/images/cash-icon.png" alt="laptop-icon" />
+              <div class="div">
+                <a class="link" href="/admin/log">TRANSACTION DETAILS</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+  </body>
+</html>

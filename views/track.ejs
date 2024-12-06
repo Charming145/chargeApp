@@ -1,0 +1,72 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body>
+    <%-include("partials/header")%>
+    <main>
+      <div class="container">
+        <h3 class="text">Welcome <%=data.name%></h3>
+        <h4>CODE: <%=data.code%></h4>
+        <p>Below are details of your device.</p>
+        <hr />
+        <div class="row">
+          <div
+            class="col-lg-4 mb-4"
+            style="background-color: rgb(49, 136, 236)"
+          >
+            <div class="unit">
+              <img
+                src="/images/phone-icon.png"
+                alt="phone-icon"
+                width="70px"
+                height="70px"
+              />
+              <h2>TOTAL PHONES</h2>
+              <h3><%=data.phone_qty%></h3>
+              <h2>UNIT PRICE</h2>
+              <h6><%=100%></h6>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-4">
+            <div class="unit">
+              <img
+                src="/images/powerbank-icon.png"
+                alt="powerbank-icon"
+                width="70px"
+                height="70px"
+              />
+              <h2>TOTAL POWER BANK</h2>
+              <h3><%=data.pb_qty%></h3>
+              <h2>UNIT PRICE</h2>
+              <h6><%=200%></h6>
+            </div>
+          </div>
+          <div
+            class="col-lg-4 mb-4"
+            style="background-color: rgb(62, 232, 232)"
+          >
+            <div class="unit">
+              <img
+                src="/images/laptop-icon.png"
+                alt="laptop-icon"
+                width="70px"
+                height="70px"
+              />
+              <h2>TOTAL LAPTOPS</h2>
+              <h3><%=data.laptop_qty%></h3>
+              <h2>UNIT PRICE</h2>
+              <h6><%=500%></h6>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h3 class="text">YOUR FEE</h3>
+        <h6><%=1500%></h6>
+        <h3 class="text"></h3>
+        <button class="btn btn-<%=data.retrived ? 'danger' : 'primary'%>">
+          <%=data.retrived ? "Device Retried" : " Device Still in stall"%>
+        </button>
+      </div>
+    </main>
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+  </body>
+</html>

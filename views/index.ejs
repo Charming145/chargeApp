@@ -1,0 +1,37 @@
+<html lang="en">
+  <%-include("partials/head")%>
+  <body class="homepage">
+    <%-include("partials/header")%>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="loginPage">
+            <h2>WELCOME TO CHARGEREGISTER MS</h2>
+
+            <img
+              src="/images/devices.png"
+              alt="user-avatar"
+              width="100px"
+              height="100px"
+            />
+            <h3>TRACK YOUR DEVICE</h3>
+            <p>Please Enter your Code/Username below</p>
+            <div class="form">
+              <form action="/" method="post">
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Code/Username"
+                  name="code"
+                />
+
+                <button class="form-control">CHECK</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%-include("partials/footer")%> <%-include("partials/script")%>
+  </body>
+</html>
